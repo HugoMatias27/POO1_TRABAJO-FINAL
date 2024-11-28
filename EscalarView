@@ -1,0 +1,28 @@
+package View;
+
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+public class Escalar {
+
+   public void escalarLabel(JLabel label, String rutaImagen) {
+    // Cargar la imagen desde el recurso
+    URL imageURL = getClass().getResource(rutaImagen); // Utiliza el método getResource() para cargar la imagen desde el recurso especificado en rutaImagen.
+
+    if (imageURL == null) {
+        System.out.println("La imagen no se pudo encontrar: " + rutaImagen);
+        return;  // No hacer nada si la imagen no se encuentra
+    }
+
+    ImageIcon originalIcon = new ImageIcon(imageURL);
+    Image img = originalIcon.getImage();
+
+    // Redimensionar la imagen manteniendo la proporción
+    Image resizedImg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+
+    // Establecer el icono redimensionado en el JLabel
+    label.setIcon(new ImageIcon(resizedImg));
+    }
+}
